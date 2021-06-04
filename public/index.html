@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2f609438b2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
     <title>Socket.IO chat</title>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+      <div class="content-page">
+        <div class="chat-content">
+            <ul id="messages"></ul>
+            <form id="form" action="">
+                <input id="input" autocomplete="off" /><button>Send</button>
+            </form>
+        </div>
+        
+        <div class="user-online" id="userOnline">
+            <p class="title-online-center"><span class="title-online">online</span></p>
+        </div>
+      </div>
+    
 
 
 

@@ -16,8 +16,11 @@ const app = {
         socket = io();
         socket.on('chat message server', app.newChatMessagePrint);
         socket.emit('new user', username);
+        socket.on('new user print', app.addNewUserOnline);
         socket.on('user connect print', app.newMessageServer);
+        socket.on('user print online', app.newUserOnline);
         socket.on('user disconnect print', app.newMessageServer);
+        socket.on('remove user', app.removeUserDisconnect); 
     },
     createEvent: () => {
         const form = document.getElementById('form');
@@ -47,8 +50,38 @@ const app = {
         messages.appendChild(newMsg);
         window.scrollTo(0, document.body.scrollHeight); 
     },
-    userDisconnect: (username) => {
+    newUserOnline: (socketList) => {
+        console.log(socketList);
+        if (socketList.length){
+            socketList.forEach((socket) => {
+                console.log(socket);
+                app.addNewUserOnline(socket);
+            }); 
+        }
+    },
+    addNewUserOnline: (socket) => {
+        const result = document.querySelector(`[data-user-id="${socket.id}"]`);
         
+        if (!result) {
+            const divUserOnline = document.getElementById('userOnline');
+            const divOneUserOnline = document.createElement('div');
+            const icon = document.createElement('i');
+            const span = document.createElement('span');
+
+            divOneUserOnline.dataset.userId = socket.id;
+            divOneUserOnline.classList.add('one-user-online');
+
+            icon.classList.add("fas", "fa-user", "tag-online");
+            span.textContent = socket.username;
+
+            divOneUserOnline.appendChild(icon);
+            divOneUserOnline.appendChild(span);
+            divUserOnline.appendChild(divOneUserOnline);
+        }
+    },
+    removeUserDisconnect: (socket) => {
+        const user = document.querySelector(`[data-user-id="${socket.id}"]`);
+        user.remove();
     }
 }
 

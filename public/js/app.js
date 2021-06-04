@@ -1,13 +1,22 @@
 let socket; 
+let username;
 
 const app = {
     init: () => {
+        
+        while (!username) {
+            username = prompt("Entrez votre pseudo", "");
+        }
+
         app.initSocketIo();
         app.createEvent();
+
     },
     initSocketIo: () => {
         socket = io();
         socket.on('chat message server', app.newChatMessagePrint);
+        socket.emit('new user', username);
+        socket.on('user connect print', app.newUserConnect);
     },
     createEvent: () => {
         const form = document.getElementById('form');
@@ -24,10 +33,17 @@ const app = {
     },
     newChatMessagePrint: (msg) => {
         let newMsg = document.createElement('li');
-        const  messages = document.getElementById('messages');
+        const messages = document.getElementById('messages');
         newMsg.textContent = msg;
         messages.appendChild(newMsg);
         window.scrollTo(0, document.body.scrollHeight);
+    },
+    newUserConnect: (username) => {
+        let newMsg = document.createElement('li');
+        const messages = document.getElementById('messages');
+        newMsg.textContent = `${username} viens de ce connecter.`;
+        messages.appendChild(newMsg);
+        window.scrollTo(0, document.body.scrollHeight); 
     }
 }
 

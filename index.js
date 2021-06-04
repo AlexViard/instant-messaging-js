@@ -10,7 +10,11 @@ const io = new Server(server);
 app.use(express.static("public"));
 
 io.on('connection', (socket) => {
-    console.log('User connected.');
+    console.log('user connect');
+    socket.on('new user', (username) => {
+        socket.username = username;
+        io.emit('user connect print', username);
+    })
 
     socket.on('chat message user', (msg) => {
         io.emit('chat message server', msg);

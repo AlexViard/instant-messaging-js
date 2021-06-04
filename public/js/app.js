@@ -32,10 +32,10 @@ const app = {
             input.value = '';
         }
     },
-    newChatMessagePrint: (msg) => {
+    newChatMessagePrint: (username, msg) => {
         let newMsg = document.createElement('li');
         const messages = document.getElementById('messages');
-        newMsg.textContent = msg;
+        newMsg.textContent = `${username} : ${msg}`;
         messages.appendChild(newMsg);
         window.scrollTo(0, document.body.scrollHeight);
     },
@@ -44,7 +44,6 @@ const app = {
         const messages = document.getElementById('messages');
         newMsg.textContent = msgServ;
         newMsg.style.color = '#FFCC00';
-        newMsg.style.fontStyle = 'Bold';
         messages.appendChild(newMsg);
         window.scrollTo(0, document.body.scrollHeight); 
     },

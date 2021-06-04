@@ -13,7 +13,7 @@ io.on('connection', (socket) => {
     console.log('user connect');
     socket.on('new user', (username) => {
         socket.username = username;
-        io.emit('user connect print', username);
+        io.emit('user connect print', `${username} vient de se connecter.`);
     })
 
     socket.on('chat message user', (msg) => {
@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('User disconnected.');
+        io.emit('user disconnect print', `${socket.username} vient de ce deconnecter.`)
     });
 });
 

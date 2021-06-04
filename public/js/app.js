@@ -16,7 +16,8 @@ const app = {
         socket = io();
         socket.on('chat message server', app.newChatMessagePrint);
         socket.emit('new user', username);
-        socket.on('user connect print', app.newUserConnect);
+        socket.on('user connect print', app.newMessageServer);
+        socket.on('user disconnect print', app.newMessageServer);
     },
     createEvent: () => {
         const form = document.getElementById('form');
@@ -38,12 +39,17 @@ const app = {
         messages.appendChild(newMsg);
         window.scrollTo(0, document.body.scrollHeight);
     },
-    newUserConnect: (username) => {
+    newMessageServer: (msgServ) => {
         let newMsg = document.createElement('li');
         const messages = document.getElementById('messages');
-        newMsg.textContent = `${username} viens de ce connecter.`;
+        newMsg.textContent = msgServ;
+        newMsg.style.color = '#FFCC00';
+        newMsg.style.fontStyle = 'Bold';
         messages.appendChild(newMsg);
         window.scrollTo(0, document.body.scrollHeight); 
+    },
+    userDisconnect: (username) => {
+        
     }
 }
 

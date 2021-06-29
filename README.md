@@ -8,7 +8,7 @@ The instant-messaging-js is a personal project based on socket io and node js, t
 
 A image example of the project, with some additional functionality.
 
-![Aperçu](img/example-node-project.png "example messaging project")
+![Aperçu](img/example-messaging-project.png "example messaging project")
 
 For more information, see the [tutorial](https://socket.io/get-started/chat).
 
